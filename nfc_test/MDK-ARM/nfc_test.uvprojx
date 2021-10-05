@@ -55,7 +55,7 @@
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\nfc_test\</ListingPath>
+          <ListingPath>.\ModbusTest\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>7</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -432,6 +432,11 @@
               <FileName>demo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\code\App\Src\demo.c</FilePath>
+            </File>
+            <File>
+              <FileName>rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\code\App\Src\rcc.c</FilePath>
             </File>
           </Files>
         </Group>
