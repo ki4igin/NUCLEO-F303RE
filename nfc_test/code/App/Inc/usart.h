@@ -45,6 +45,7 @@ extern "C"
   #include "platform.h"
 
   extern UART_HandleTypeDef huart2;
+  extern UART_HandleTypeDef huart3;
 
   void    UsartInit(UART_HandleTypeDef *husart);
   uint8_t UsartTxByte(uint8_t data);
@@ -52,6 +53,7 @@ extern "C"
   uint8_t UsartRx(uint8_t *data, uint16_t *dataLen);
 
   void MX_USART2_UART_Init(void);
+  void MX_USART3_UART_Init(void);
 
   #ifdef __cplusplus
 }

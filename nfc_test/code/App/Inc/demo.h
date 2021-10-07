@@ -55,7 +55,7 @@ extern "C"
   bool        demoIni(void);
   extern void demoCycle(void);
 
-  void demowrData(uint8_t *pdata, uint32_t size);
+  void demowrData(void *pdata, uint32_t size);
 
   #ifdef __cplusplus
 }

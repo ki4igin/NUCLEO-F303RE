@@ -152,7 +152,7 @@ static void demoP2P(void);
 static void demoAPDU(void);
 static void demoNfcv(rfalNfcvListenDevice *nfcvDev);
 static void demoNfcf(rfalNfcfListenDevice *nfcfDev);
-static void demoCE(rfalNfcDevice *nfcDev);
+// static void demoCE(rfalNfcDevice *nfcDev);
 static void demoNotif(rfalNfcState st);
 ReturnCode  demoTransceiveBlocking(uint8_t *txBuf, uint16_t txBufSize, uint8_t **rxBuf, uint16_t **rcvLen, uint32_t fwt);
 
@@ -163,9 +163,9 @@ ReturnCode  demoTransceiveBlocking(uint8_t *txBuf, uint16_t txBufSize, uint8_t *
  *  This function receives the event notifications from RFAL
  *****************************************************************************
  */
-void demowrData(uint8_t *pdata, uint32_t size)
+void demowrData(void *pdata, uint32_t size)
 {
-  wrData.pdata = pdata;
+  wrData.pdata = (uint8_t*)pdata;
   wrData.size  = size;
 }
 
@@ -405,7 +405,7 @@ void demoCycle(void)
             platformLedOn(((nfcDevice->type == RFAL_NFC_POLL_TYPE_NFCA) ? PLATFORM_LED_A_PORT : PLATFORM_LED_F_PORT),
                           ((nfcDevice->type == RFAL_NFC_POLL_TYPE_NFCA) ? PLATFORM_LED_A_PIN : PLATFORM_LED_F_PIN));
 
-            demoCE(nfcDevice);
+            // demoCE(nfcDevice);
             break;
 
           /*******************************************************************************/
@@ -426,44 +426,44 @@ void demoCycle(void)
   }
 }
 
-static void demoCE(rfalNfcDevice *nfcDev)
-{
-#if defined(ST25R3916) && defined(RFAL_FEATURE_LISTEN_MODE)
+// static void demoCE(rfalNfcDevice *nfcDev)
+// {
+// #if defined(ST25R3916) && defined(RFAL_FEATURE_LISTEN_MODE)
 
-  ReturnCode err;
-  uint8_t *  rxData;
-  uint16_t * rcvLen;
-  uint8_t    txBuf[100];
-  uint16_t   txLen;
+//   ReturnCode err;
+//   uint8_t *  rxData;
+//   uint16_t * rcvLen;
+//   uint8_t    txBuf[100];
+//   uint16_t   txLen;
 
-  demoCeInit(ceNFCF_nfcid2);
+//   demoCeInit(ceNFCF_nfcid2);
 
-  do
-  {
-    rfalNfcWorker();
+//   do
+//   {
+//     rfalNfcWorker();
 
-    switch (rfalNfcGetState())
-    {
-      case RFAL_NFC_STATE_ACTIVATED:
-        err = demoTransceiveBlocking(NULL, 0, &rxData, &rcvLen, 0);
-        break;
+//     switch (rfalNfcGetState())
+//     {
+//       case RFAL_NFC_STATE_ACTIVATED:
+//         err = demoTransceiveBlocking(NULL, 0, &rxData, &rcvLen, 0);
+//         break;
 
-      case RFAL_NFC_STATE_DATAEXCHANGE:
-      case RFAL_NFC_STATE_DATAEXCHANGE_DONE:
+//       case RFAL_NFC_STATE_DATAEXCHANGE:
+//       case RFAL_NFC_STATE_DATAEXCHANGE_DONE:
 
-        txLen =
-            ((nfcDev->type == RFAL_NFC_POLL_TYPE_NFCA) ? demoCeT4T(rxData, *rcvLen, txBuf, sizeof(txBuf)) : demoCeT3T(rxData, *rcvLen, txBuf, sizeof(txBuf)));
-        err = demoTransceiveBlocking(txBuf, txLen, &rxData, &rcvLen, RFAL_FWT_NONE);
-        break;
+//         txLen =
+//             ((nfcDev->type == RFAL_NFC_POLL_TYPE_NFCA) ? demoCeT4T(rxData, *rcvLen, txBuf, sizeof(txBuf)) : demoCeT3T(rxData, *rcvLen, txBuf, sizeof(txBuf)));
+//         err = demoTransceiveBlocking(txBuf, txLen, &rxData, &rcvLen, RFAL_FWT_NONE);
+//         break;
 
-      case RFAL_NFC_STATE_LISTEN_SLEEP:
-      default:
-        break;
-    }
-  } while ((err == ERR_NONE) || (err == ERR_SLEEP_REQ));
+//       case RFAL_NFC_STATE_LISTEN_SLEEP:
+//       default:
+//         break;
+//     }
+//   } while ((err == ERR_NONE) || (err == ERR_SLEEP_REQ));
 
-#endif /* RFAL_FEATURE_LISTEN_MODE */
-}
+// #endif /* RFAL_FEATURE_LISTEN_MODE */
+// }
 
 /*!
  *****************************************************************************
@@ -512,9 +512,9 @@ static void demoNfcf(rfalNfcfListenDevice *nfcfDev)
 static void demoNfcv(rfalNfcvListenDevice *nfcvDev)
 {
   ReturnCode err;
-  uint16_t   rcvLen;
-  uint8_t    blockNum = 1;
-  uint8_t    rxBuf[1 + DEMO_NFCV_BLOCK_LEN + RFAL_CRC_LEN]; /* Flags + Block Data + CRC */
+  // uint16_t   rcvLen;
+  // uint8_t    blockNum = 1;
+  // uint8_t    rxBuf[1 + DEMO_NFCV_BLOCK_LEN + RFAL_CRC_LEN]; /* Flags + Block Data + CRC */
   uint8_t *  uid;
 
   uid = nfcvDev->InvRes.UID;

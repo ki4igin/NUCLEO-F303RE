@@ -93,7 +93,7 @@ int logUsart(const char *format, ...)
 {
 #if (USE_LOGGER == LOGGER_ON)
   {
-  #define LOG_BUFFER_SIZE 256
+  #define LOG_BUFFER_SIZE 128
     char    buf[LOG_BUFFER_SIZE];
     va_list argptr;
     va_start(argptr, format);

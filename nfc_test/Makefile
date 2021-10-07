@@ -77,8 +77,14 @@ FLAGS += -funsigned-char
 # FLAGS += -fshort-wchar
 
 # FLAGS += -fpack-struct
-FLAGS += -std=gnu11
+FLAGS += -std=gnu17
 # FLAGS += -flto
+
+FLAGS += -Wswitch-enum
+FLAGS += -Wimplicit-fallthrough
+FLAGS += -Wundef
+FLAGS += -Wdouble-promotion
+FLAGS += -fstack-usage -Wstack-usage=256
 FLAGS += -Winline -Wall -Wextra -Wpedantic #-Werror 
 
 AFLAGS := $(FLAGS)
@@ -102,6 +108,7 @@ LFLAGS += -specs=nano.specs
 # LFLAGS += -u _printf_float
 LFLAGS += -Wl,--gc-sections
 LFLAGS += -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref 
+LFLAGS += -u_scanf_float 
 
 
 ###############################################################################
@@ -123,7 +130,7 @@ vpath %.s $(sort $(INCLUDES))
 # Build all
 all: build
 	@echo
-	$(SZ) $(BUILD_DIR)/$(TARGET).elf -G
+	$(SZ) $(BUILD_DIR)/$(TARGET).elf
 	@echo
 	@echo -e "\033[32;1;40m""Listing:""\033[0m" $(BUILD_DIR)/$(TARGET).lss
 

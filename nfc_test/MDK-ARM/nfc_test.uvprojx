@@ -438,6 +438,11 @@
               <FileType>1</FileType>
               <FilePath>..\code\App\Src\rcc.c</FilePath>
             </File>
+            <File>
+              <FileName>aim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\code\App\Src\aim.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -912,61 +917,6 @@
               <FileName>rfal_t4t.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\code\Middlewares\ST\rfal\Src\rfal_t4t.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_poller.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\poller\ndef_poller.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_t2t.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\poller\ndef_t2t.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_t3t.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\poller\ndef_t3t.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_t4t.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\poller\ndef_t4t.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_t5t.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\poller\ndef_t5t.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_message.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\message\ndef_message.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_record.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\message\ndef_record.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_type_wifi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\message\ndef_type_wifi.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_types.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\message\ndef_types.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_types_mime.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\message\ndef_types_mime.c</FilePath>
-            </File>
-            <File>
-              <FileName>ndef_types_rtd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\code\Middlewares\ST\ndef\Src\message\ndef_types_rtd.c</FilePath>
             </File>
           </Files>
         </Group>
