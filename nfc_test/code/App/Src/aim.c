@@ -25,6 +25,8 @@ uint16_t AimReadData(AimData_t *data)
     rxdata[i] = 0;
   }
   float dist, elev, tilt;
+
+  __HAL_UART_FLUSH_RDR(&huart3);
   HAL_UART_Transmit(&huart3, txdata, sizeof(txdata), 1000);
   HAL_UART_Receive(&huart3, rxdata, sizeof(rxdata), 100);
 
