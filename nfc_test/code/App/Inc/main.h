@@ -82,6 +82,9 @@ extern "C"
   #define SPI1_CS_Pin         GPIO_PIN_6
   #define SPI1_CS_GPIO_Port   GPIOB
 
+  #define CHARGE_Pin       GPIO_PIN_8
+  #define CHARGE_GPIO_Port GPIOB
+
   void _Error_Handler(char *, int);
 
   #define Error_Handler() _Error_Handler(__FILE__, __LINE__)

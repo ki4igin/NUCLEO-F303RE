@@ -2,3 +2,5 @@
 !/MDK-ARM/*.uvprojx
 !/MDK-ARM/*.s
 /build/*
+/Stm32Cube/*
+!/Stm32Cube/*.ioc

@@ -37,9 +37,14 @@ typedef enum
 {
   STATE_NOT_INIT,
   STATE_INIT,
+  STATE_CHECK,
+  STATE_WRITE_START,
+  STATE_WRITE,
   STATE_READ_START,
   STATE_READ,
-  STATE_CNT
+  STATE_READ_AIM_START,
+  STATE_READ_AIM,
+  STATE_MAX
 } State_t;
 /* Private define ------------------------------------------------------------*/
 
@@ -131,34 +136,58 @@ int main(void)
   while (1)
   {
     static uint32_t tickstart;
+    uint32_t        data[16] = {0};
     switch (state)
     {
       case STATE_NOT_INIT:
         break;
       case STATE_INIT:
         break;
+      case STATE_CHECK:
+        if (demoCheckCycle() == 0)
+        {
+          state = STATE_INIT;
+        }
+        break;
       case STATE_READ_START:
         tickstart = HAL_GetTick();
         state     = STATE_READ;
+        demordData(&data, 0, sizeof(data));
         break;
       case STATE_READ:
+        if (demoReadCycle() == 0)
+        {
+          platformLog("\r\nread data:\r\n%s\r\n", hex2Str((uint8_t *)&data, sizeof(data)));
+          state = STATE_INIT;
+        }
+        break;
+      case STATE_READ_AIM_START:
+        tickstart = HAL_GetTick();
+        state     = STATE_READ_AIM;
+        break;
+      case STATE_READ_AIM:
         if ((HAL_GetTick() - tickstart) > 1000)
         {
           uint16_t err = AimReadData(&aimData);
-          if (err == 0)
-          {
-            demowrData(&aimData, sizeof(aimData));
-          }
-          state = STATE_READ_START;
+          state        = (err == 0) ? STATE_WRITE_START : STATE_READ_AIM_START;
         }
-        // demoCycle();
         break;
-      case STATE_CNT:
+      case STATE_WRITE_START:
+        tickstart = HAL_GetTick();
+        demowrData(&aimData, sizeof(aimData));
+        state = STATE_WRITE;
         break;
+      case STATE_WRITE:
+        if (demoWriteCycle() == 0)
+        {
+          state = STATE_INIT;
+        }
+        break;
+
       default:
         break;
     }
-    demoCycle();
+    // demoCycle();
     if (huart2.RxXferCount == 0)
     {
       CmdWork();
@@ -191,12 +220,24 @@ void CmdWork()
       platformLedOff(PLATFORM_LED_AP2P_PORT, PLATFORM_LED_AP2P_PIN);
       platformLedOff(PLATFORM_LED_FIELD_PORT, PLATFORM_LED_FIELD_PIN);
       break;
+    case 0x63686563:  // chec
+      state = STATE_CHECK;
+      break;
     case 0x73746f70:  //stop
-      demowrData(buf, 0);
+      // demoStop();
       state = STATE_INIT;
       break;
     case 0x72656164:  // read
       state = STATE_READ_START;
+      break;
+    case 0x77726974:  // writ
+      state = STATE_READ_AIM_START;
+      break;
+    case 0x63686f6e:  // chon
+      ChargeOn();
+      break;
+    case 0x63686f66:  // chof
+      ChargeOff();
       break;
     case 0x71776572:  // qwer
       NVIC_SystemReset();
