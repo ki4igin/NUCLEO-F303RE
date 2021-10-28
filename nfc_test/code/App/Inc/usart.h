@@ -43,7 +43,6 @@ extern "C"
 
   /* Includes ------------------------------------------------------------------*/
   #include "platform.h"
-  #include "stm32f3xx_hal_uart.h"
 
   extern UART_HandleTypeDef huart2;
   extern UART_HandleTypeDef huart3;
@@ -55,14 +54,6 @@ extern "C"
 
   void MX_USART2_UART_Init(void);
   void MX_USART3_UART_Init(void);
-
-  __STATIC_INLINE void __HAL_UART_FLUSH_RDR(UART_HandleTypeDef *husart)
-  {
-    __HAL_UART_CLEAR_FLAG(husart, UART_CLEAR_OREF);
-    volatile uint8_t data;
-    data = husart->Instance->RDR;    
-    (void)data;
-  }
 
   #ifdef __cplusplus
 }
