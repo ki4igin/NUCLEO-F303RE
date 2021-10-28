@@ -38,6 +38,15 @@ extern "C" {
 void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+__STATIC_INLINE void ChargeOn(void)
+{
+  HAL_GPIO_WritePin(CHARGE_GPIO_Port, CHARGE_Pin, GPIO_PIN_SET);
+}
+
+__STATIC_INLINE void ChargeOff(void)
+{
+  HAL_GPIO_WritePin(CHARGE_GPIO_Port, CHARGE_Pin, GPIO_PIN_RESET);
+}
 
 /* USER CODE END Prototypes */
 

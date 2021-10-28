@@ -53,9 +53,17 @@ extern "C"
 
   /* Exported functions ------------------------------------------------------- */
   bool        demoIni(void);
-  extern void demoCycle(void);
+  // extern void demoCycle(void);
+
+  ErrorStatus demoCheckCycle(void);
+  ErrorStatus demoWriteCycle(void);
+  ErrorStatus demoReadCycle(void);
+  void        demoStop(void);
+
+  uint8_t demoGetStatus(void);
 
   void demowrData(void *pdata, uint32_t size);
+  void demordData(void *pdata, uint8_t startBlock, uint32_t size);
 
   #ifdef __cplusplus
 }

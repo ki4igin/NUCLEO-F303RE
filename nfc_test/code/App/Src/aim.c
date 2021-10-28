@@ -18,7 +18,7 @@ char str[80];
 // Functions -------------------------------------------------------------------
 uint16_t AimReadData(AimData_t *data)
 {
-  uint8_t txdata[7] = "?DATD\r\n";
+  uint8_t txdata[6] = "?DATD\n";
 
   for (uint32_t i = 0; i < 256; i++)
   {
